@@ -4,7 +4,7 @@ An API to interface with AirTouch 3 AC controller.
 
 ## Why Vzduch Dotek
 
-Vzduch Dotek translates to `Air Touch` in Czech. Naming is always hard. Now as to `why` do this? Because I want local control of my AC unit. I run [Home Assistant](https://github.com/home-assistant) and while AirTouch 3 has IFTTT support, IFTTT is not ideal. Its still in the cloud and on top of that there is no feedback from IFTTT if the action succeeded or failed. So when automating this in Home Assistant it only works `most of the time`. I have created a `Home Assistant` custom component that wraps this api. I will be publishing this shortly.
+Vzduch Dotek translates to `Air Touch` in Czech (naming is always hard). Now as to `why` do this? Because I want local control of my AC unit. I run [Home Assistant](https://github.com/home-assistant) and while AirTouch 3 has IFTTT support, IFTTT is not ideal. IFTTT is still in the cloud and on top of that there is no feedback from IFTTT if the action succeeded or failed. So when doing any automatiions in Home Assistant it only works `most of the time`. I have created a `Home Assistant` custom component that wraps this api.
 
 ## Settings
 
@@ -23,7 +23,7 @@ I used `vscode` to put this together. The default port the api runs on is `5353`
 
 I have also include a `DockerFile` which runs the api. Note: The `DockerFile` relies on a compiled version of the api (Linux). I used this to create the artefacts required: `dotnet publish -c Release --self-contained -r linux-x64`
 
-The build has been tested on Windows 10 / Linux.
+The build has been tested on Windows 10 and Linux (Ubuntu).
 
 ## Limitations
 
