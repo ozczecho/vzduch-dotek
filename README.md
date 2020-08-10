@@ -25,6 +25,13 @@ I have also include a `DockerFile` which runs the api. Note: The `DockerFile` re
 
 The build has been tested on Windows 10 and Linux (Ubuntu).
 
+### Examples
+
+* Get current status: `http://localhost:5353/api/aircons`
+* Switch aircon On: `http://localhost:5353/api/aircons/0/switch/1`
+* Toggle aircon: `http://localhost:5353/api/aircons/0/toggle`
+* Switch zone Off: `http://localhost:5353/api/aircons/0/zones/0/switch/0`
+
 ## Limitations
 
 There are many. This code has been tested against one (yes just one) AirTouch 3 unit interfacing with a Daikin System reverse cycle ducted aircondition unit. It has not been tested with any other systems or combinations of. Please bear that in mind. Other limitations:
