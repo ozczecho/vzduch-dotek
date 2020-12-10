@@ -25,6 +25,24 @@ I have also include a `DockerFile` which runs the api. Note: The `DockerFile` re
 
 The build has been tested on Windows 10 and Linux (Ubuntu).
 
+### Running and Building Within Docker
+
+Clone this repo, cd into the source directoryi `cd vzduch-dotek`, edit appsettings.json, and run `docker build -f Dockerfile -t vzduch-dotek  .`
+
+Once built, you should be able to run it as any other docker container, including putting into a docker-compose file. An example to get you started:
+
+```
+---
+version: "2.1"
+services:
+  vzduch-dotek:
+    container_name: vzduch-dotek
+    image: vzduch-dotek
+    restart: unless-stopped
+    ports:
+      - 5353:5353
+```
+
 ### Examples
 
 * Get current status: `http://localhost:5353/api/aircons`
