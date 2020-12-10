@@ -5,7 +5,6 @@ COPY *.csproj .
 RUN dotnet restore
 
 COPY . .
-#RUN dotnet publish -c Release -o /app --no-restore --self-contained
 RUN dotnet publish -c release -o /app -r linux-x64 --self-contained true --no-restore /p:PublishReadyToRun=true
 
 # final stage/image
