@@ -75,7 +75,7 @@ namespace VzduchDotek.Net.Controllers
         }
 
         [HttpPost("aircons/{selectedId}/zones/{zoneId}/switch/{status}")]
-        public object ZoneSwitch(int selecteId, int zoneId, ZoneStatus status)
+        public object ZoneSwitch(int selectedId, int zoneId, ZoneStatus status)
         {
             var result = _client.ConnectAndSend(_atMessages.GetInitMsg());
             var parser = new MessageResponseParser();
@@ -100,7 +100,7 @@ namespace VzduchDotek.Net.Controllers
         }
 
         [HttpPost("aircons/{selectedId}/zones/{zoneId}/toggle")]
-        public object ZoneToggle(int selecteId, int zoneId)
+        public object ZoneToggle(int selectedId, int zoneId)
         {
             var result = _client.ConnectAndSend(_atMessages.GetInitMsg());
             var parser = new MessageResponseParser();
@@ -122,7 +122,7 @@ namespace VzduchDotek.Net.Controllers
         }
 
         [HttpPost("aircons/{selectedId}/modes/{mode}")] 
-        public object SetAcMode(int selecteId, AcMode mode)
+        public object SetAcMode(int selectedId, AcMode mode)
         {
             var result = _client.ConnectAndSend(_atMessages.GetInitMsg());
             var parser = new MessageResponseParser();
@@ -144,7 +144,7 @@ namespace VzduchDotek.Net.Controllers
         }
 
         [HttpPost("aircons/{selectedId}/fanmodes/{mode}")]
-        public object SetAcFanMode(int selecteId, AcFanMode mode)
+        public object SetAcFanMode(int selectedId, AcFanMode mode)
         {
             var result = _client.ConnectAndSend(_atMessages.GetInitMsg());
             var parser = new MessageResponseParser();
@@ -166,7 +166,7 @@ namespace VzduchDotek.Net.Controllers
         }
 
         [HttpPost("aircons/{selectedId}/temperature/{incDec}")]
-        public object SetTemperature(int selecteId, AcTemperature incDec)
+        public object SetTemperature(int selectedId, AcTemperature incDec)
         {
             var result = _client.ConnectAndSend(_atMessages.GetInitMsg());
             var parser = new MessageResponseParser();
