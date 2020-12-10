@@ -19,11 +19,25 @@ The `appsettings.json` file contains a section for the AirTouch3 controller. You
 
 ## Running
 
-I used `vscode` to put this together. The default port the api runs on is `5353`. Once you pull down the repo, update the `appsettings.json` file you should be able to hit F5 and then navigate to `http://localhost:5353/api/aircons` and get the current status of your AC.
+I used `vscode` to put this together. The default port the api runs on is `5353`. Once you pull down the repo, update the `appsettings.json` file. After that, you should be able to hit F5 and then navigate to `http://localhost:5353/api/aircons` and get the current status of your AC. The build has been tested on Windows 10 and Linux (Ubuntu).
 
-I have also include a `DockerFile` which runs the api. Note: The `DockerFile` relies on a compiled version of the api (Linux). I used this to create the artefacts required: `dotnet publish -c Release --self-contained -r linux-x64`
+### Running and Building Within Docker
 
-The build has been tested on Windows 10 and Linux (Ubuntu).
+CD into the source directory `cd vzduch-dotek`, edit `appsettings.json`, and run `docker build -f Dockerfile -t vzduch-dotek  .`
+
+Once built, you should be able to run it as any other docker container, including putting into a docker-compose file. An example to get you started:
+
+```yaml
+---
+version: "2.1"
+services:
+  vzduch-dotek:
+    container_name: vzduch-dotek
+    image: vzduch-dotek
+    restart: unless-stopped
+    ports:
+      - 5353:5353
+```
 
 ### Examples
 
@@ -35,7 +49,8 @@ The build has been tested on Windows 10 and Linux (Ubuntu).
 ## Limitations
 
 There are many. This code has been tested against one (yes just one) AirTouch 3 unit interfacing with a Daikin System reverse cycle ducted aircondition unit. It has not been tested with any other systems or combinations of. Please bear that in mind. Other limitations:
-* AirTouch 3 supports controlling upto two AC units. `Vzduch Dotek` currently only supports controlling one AC unit.  
+
+* AirTouch 3 supports controlling upto two AC units. `Vzduch Dotek` currently only supports controlling one AC unit.
 * Setting Date / Time is currently not supported
 * Setting passwords not supported
 
