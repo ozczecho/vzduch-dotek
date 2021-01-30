@@ -253,6 +253,7 @@ namespace VzduchDotek.Net.AirTouch
                                 sensor1 = sensors.FirstOrDefault(x => x.Id == ((i * 2) + 1) && x.IsAvailable);
                             if (sensor1 != null)
                                 zone.Sensors.Add(sensor1);
+                            zone.ZoneTemperatureType = ZoneTemperatureType.UseSensor;
                             break;
                         case 2:
                             var sensor2 = sensors.FirstOrDefault(x => x.Id == ((i * 2) + 1) && x.IsAvailable);
@@ -260,6 +261,7 @@ namespace VzduchDotek.Net.AirTouch
                                 sensor2 = sensors.FirstOrDefault(x => x.Id == (i * 2) && x.IsAvailable);
                             if (sensor2 != null)
                                 zone.Sensors.Add(sensor2);
+                            zone.ZoneTemperatureType = ZoneTemperatureType.UseSensor;
                             break;
                         case 3:
                             zone.ZoneTemperatureType = ZoneTemperatureType.UseAverage;
