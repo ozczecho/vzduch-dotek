@@ -27,6 +27,4 @@ ENV LC_ALL ${LANG}
 WORKDIR /app
 COPY --from=build /app .
 
-RUN ln -sf /dev/stdout Logs/vzduch.dotek.log
-
 ENTRYPOINT ["/app/VzduchDotek.Net"]

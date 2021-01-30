@@ -1,10 +1,10 @@
 # Vzduch Dotek
 
-An API to interface with AirTouch 3 AC controller.
+An API to interface with an AirTouch 3 AC controller.
 
 ## Why Vzduch Dotek
 
-Vzduch Dotek translates to `Air Touch` in Czech (naming is always hard). Now as to `why` do this? Because I want local control of my AC unit. I run [Home Assistant](https://github.com/home-assistant) and while AirTouch 3 has IFTTT support, IFTTT is not ideal. IFTTT is still in the cloud and on top of that there is no feedback from IFTTT if the action succeeded or failed. So when doing any automatiions in Home Assistant it only works `most of the time`. I have created a `Home Assistant` custom component that wraps this api.
+Vzduch Dotek translates to `Air Touch` in Czech (naming is always hard). Now as to `why` do this? Because I want local control of my AC unit. I run [Home Assistant](https://github.com/home-assistant) and while AirTouch 3 has IFTTT support, IFTTT is not ideal. IFTTT is still in the cloud and on top of that there is no feedback from IFTTT if the action succeeded or failed. So when doing any automations in Home Assistant it only works `most of the time`. I have also created a `Home Assistant` custom component that wraps this api, but the Api is standalone and can be used with any interface.
 
 ## Settings
 
@@ -19,7 +19,7 @@ The `appsettings.json` file contains a section for the AirTouch3 controller. You
 
 ## Running
 
-I used `vscode` to put this together. The default port the api runs on is `5353`. Once you pull down the repo, update the `appsettings.json` file. After that, you should be able to hit F5 and then navigate to `http://localhost:5353/api/aircons` and get the current status of your AC. The build has been tested on Windows 10 and Linux (Ubuntu).
+I used `vscode` to put this together. The default port the api runs on is `5353`. Once you pull down the repo, you will need to update the `appsettings.json` file to match your home environment. Without setting the right ip address and port of the actual AirTouch 3 control unit this Api will not work. After that, you should be able to hit F5 (if running inside of `vscode` and then navigate to `http://localhost:5353/api/aircons` and get the current status of your AC. The build has been tested on Windows 10 and Linux (Ubuntu).
 
 ### Running and Building Within Docker
 
@@ -48,11 +48,12 @@ services:
 
 ## Limitations
 
-There are many. This code has been tested against one (yes just one) AirTouch 3 unit interfacing with a Daikin System reverse cycle ducted aircondition unit. It has not been tested with any other systems or combinations of. Please bear that in mind. Other limitations:
+There are many limitations. This code has been tested against one (yes just one) AirTouch 3 unit interfacing with a Daikin System reverse cycle ducted aircondition unit. It has not been tested with any other systems or combinations of. Please bear that in mind. Other limitations:
 
 * AirTouch 3 supports controlling upto two AC units. `Vzduch Dotek` currently only supports controlling one AC unit.
 * Setting Date / Time is currently not supported
 * Setting passwords not supported
+* Some temperature setting functionality not supported
 
 ## Todo
 
