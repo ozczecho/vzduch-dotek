@@ -16,6 +16,7 @@ namespace VzduchDotek.Net.AirTouch
         public const int DesiredTemperature = 431;
         public const int RoomTemperature = 433;
         public const int AirconId = 439;
+        public const int ThermostatMode = 441;
         public const int TouchpadGroupId = 443;
         public const int TouchpadTemperature = 445;
         public const int SensorDataStart = 451;

@@ -16,6 +16,7 @@ namespace VzduchDotek.Net.AirTouch
         public ZoneStatus Status { get; set; }
         public int FanValue {get;set;}
         public bool IsSpill {get;set;}
+        public int DesiredTemperature {get;set;}
         public ZoneTemperatureType ZoneTemperatureType {get;set;}
         public List<Sensor> Sensors {get;set;}
 

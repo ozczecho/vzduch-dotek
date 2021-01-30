@@ -185,6 +185,32 @@ namespace VzduchDotek.Net.Controllers
             Log.ForContext<VzduchDotekController>().Verbose("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
-        }        
+        }
+
+        [HttpPost("aircons/{selectedId}/zones/{zoneId}/temperature/{incDec}")]
+        ///
+        /// If zone is temperature managed, this api will set the desired zone temp
+        /// If zone is fan managed, this api will set fan percentage
+        ///
+        public object SetZoneFan(int selectedId, int zoneId, AcTemperature incDec)
+        {
+            var result = _client.ConnectAndSend(_atMessages.GetInitMsg());
+            var parser = new MessageResponseParser();
+            var at = parser.Parse(result);
+
+            var ac = at.GetSelectedAircon();
+            if (ac != null)
+            {
+                result = _client.ConnectAndSend(_atMessages.SetFan(zoneId, (int)incDec));
+                at = parser.Parse(result);
+            }
+            else
+                throw new Exception("Failed to find selected aircon unit");
+
+            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            Log.ForContext<VzduchDotekController>().Verbose("{@AirTouchSystem}", at);
+
+            return Content(response, "application/json");
+        }
     }
 }

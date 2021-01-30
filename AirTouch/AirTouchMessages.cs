@@ -128,7 +128,7 @@ namespace VzduchDotek.Net.AirTouch
             {
                 _message[4] = unchecked((byte)-93);
             }
-            else if (incDec < 0)
+            else
             {
                 _message[4] = unchecked((byte)-109);
             }
@@ -169,13 +169,13 @@ namespace VzduchDotek.Net.AirTouch
             return _message;
         }
 
-        public byte[] SetFan(int room, string direction)
+        public byte[] SetFan(int room, int incDec)
         {
             ResetContents();
             _message[1] = 1;
             _message[1] = unchecked((byte)-127);
             _message[3] = (byte)room;
-            if (direction == "UP")
+            if (incDec >= 0)
             {
                 _message[4] = 2;
             }

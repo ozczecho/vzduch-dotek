@@ -21,6 +21,7 @@ namespace VzduchDotek.Net.AirTouch
         public int TouchPadTemperature {get;set;}
         public int DesiredTemperature{get;set;}
         public int RoomTemperature {get;set;}
+        public int ThermostatMode {get;set;}
         public AcFanMode FanMode { get; set; }
 
         public List<Zone> Zones { get; set; }
