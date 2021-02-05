@@ -235,7 +235,7 @@ namespace VzduchDotek.Net.AirTouch
                 int startZone = Convert.ToInt32(groupData[i].JavaStyleSubstring(0, 4), 2);
                 zone.Status = zoneData[startZone].JavaStyleSubstring(0, 1) == "1" ? ZoneStatus.ZoneOn : ZoneStatus.ZoneOff;
                 zone.FanValue = zone.Status == ZoneStatus.ZoneOn ? Convert.ToInt32(groupPercentageData[i].JavaStyleSubstring(1, 8), 2) * 5 : 0; //Only valid when zone is turned on...set to zero otherwise
-                zone.DesiredTemperature = zone.Status == ZoneStatus.ZoneOn ? Convert.ToInt32(groupSetting[i].JavaStyleSubstring(3, 8), 2) + 1 : 0;
+                zone.DesiredTemperature = Convert.ToInt32(groupSetting[i].JavaStyleSubstring(3, 8), 2) + 1;
                 zone.IsSpill = zoneData[i].JavaStyleSubstring(1, 2) == "1";
                 Log.Verbose($"Zone Data {zoneData[startZone]} for Start Zone {startZone} and status is {zone.Status}");
 
