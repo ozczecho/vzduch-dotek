@@ -168,6 +168,10 @@ namespace VzduchDotek.Net.AirTouch
 
             return temperature;
         }
+        /// Mode 0 is AC
+        /// Mode 1 + (Number of Zones) is Average
+        /// Mode 2 + (Number of Zones) is Auto
+        /// Mode (Number of Zones) - 1 is Zone (unless Zone is OFF then its AC)
         public static int GetThermostatMode(this AirTouchResponse response)
         {
             var thermostatMode = Convert.ToInt32(response.Content[MessageConstants.ThermostatMode], 2);
