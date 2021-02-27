@@ -19,12 +19,12 @@ namespace VzduchDotek.Net
 
             try 
             {
-                Log.Information("Starting host");
+                Log.ForContext<Program>().Information("Starting host");
                 CreateHostBuilder(args).Build().Run();
             }
             catch(Exception ex)
             {
-                Log.Fatal(ex, "Host has terminated unexpectedly");
+                Log.ForContext<Program>().Fatal(ex, "Host has terminated unexpectedly");
             }
             finally
             {
@@ -35,7 +35,7 @@ namespace VzduchDotek.Net
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .AddEnvironmentVariables()
+            .AddEnvironmentVariables(prefix: "DOTEK_")
             .Build();
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -43,9 +43,11 @@ namespace VzduchDotek.Net
                 .UseLamar()
                 .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
+                { 
+                    var port = Configuration["vzduchPort"] ?? "80";
+                    
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://*:5353");
+                    webBuilder.UseUrls($"http://*:{port}");
                     webBuilder.UseKestrel();
                     webBuilder.ConfigureServices(services =>
                     {
