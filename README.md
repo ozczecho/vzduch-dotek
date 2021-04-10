@@ -46,6 +46,11 @@ services:
 * Toggle aircon: `http://localhost:5353/api/aircons/0/toggle`
 * Switch zone Off: `http://localhost:5353/api/aircons/0/zones/0/switch/0`
 
+## Front Ends
+
+* Custom Control - I have developed a [Home Assistant](https://github.com/home-assistant) custom control. More information [here](https://github.com/ozczecho/custom_components/tree/master/airtouch3).
+* Homebridge - [@L0rdCha0s](https://github.com/L0rdCha0s) has developed a homebridge plugin allowing you to control your AC via Homekit. More information [here](https://github.com/L0rdCha0s/homebridge-airtouch3-airconditioner).
+
 ## Limitations
 
 There are many limitations. This code has been tested against one (yes just one) AirTouch 3 unit interfacing with a Daikin System reverse cycle ducted aircondition unit. It has not been tested with any other systems or combinations of. Please bear that in mind. Other limitations:
