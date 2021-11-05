@@ -46,7 +46,10 @@ namespace VzduchDotek.Net
                 .ConfigureWebHostDefaults(webBuilder =>
                 { 
                     var port = Configuration["vzduchPort"] ?? "80";
-                    
+                     
+                    Log.ForContext<Program>().Information($"Airtouch panel host + port is [{Configuration["airTouch:localHost"]}:{Configuration["airTouch:localPort"]}]");
+                    Log.ForContext<Program>().Information($"LogLevel [{Configuration["Serilog:MinimumLevel"]}]");
+
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseUrls($"http://*:{port}");
                     webBuilder.UseKestrel();
