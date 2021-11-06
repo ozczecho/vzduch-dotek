@@ -21,6 +21,10 @@ The `appsettings.json` file contains a section for the AirTouch3 controller. You
 
 I used `vscode` to put this together. The default port the api runs on is `5353`. Once you pull down the repo, you will need to update the `appsettings.json` file to match your home environment. Without setting the right ip address and port of the actual AirTouch 3 control unit this Api will not work. After that, you should be able to hit F5 (if running inside of `vscode` and then navigate to `http://localhost:5353/api/aircons` and get the current status of your AC. The build has been tested on Windows 10 and Linux (Ubuntu).
 
+### Home Assistant Addon
+
+I have created an addon for this Api. This makes it easy to get up and running. See [here](https://github.com/ozczecho/home-assistant-addons/tree/main/vzduch)
+
 ### Running and Building Within Docker
 
 CD into the source directory `cd vzduch-dotek`, edit `appsettings.json`, and run `docker build -f Dockerfile -t vzduch-dotek  .`
