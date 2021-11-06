@@ -41,6 +41,10 @@ namespace VzduchDotek.Net
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddEnvironmentVariables(prefix: "DOTEK_");
+                })
                 .UseLamar()
                 .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
