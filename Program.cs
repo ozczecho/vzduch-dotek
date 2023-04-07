@@ -15,7 +15,8 @@ namespace VzduchDotek.Net
         {
             Log.Logger = new LoggerConfiguration() 
                 .ReadFrom.Configuration(Configuration)
-                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+                .MinimumLevel.Debug()
+               // .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();
 
             try 
@@ -52,7 +53,7 @@ namespace VzduchDotek.Net
                     var port = Configuration["vzduchPort"] ?? "80";
                      
                     Log.ForContext<Program>().Information($"Airtouch panel host + port is [{Configuration["airTouch:localHost"]}:{Configuration["airTouch:localPort"]}]");
-                    Log.ForContext<Program>().Information($"LogLevel [{Configuration["Serilog:MinimumLevel"]}]");
+                    Log.ForContext<Program>().Information($"LogLevel [{Configuration["Serilog:MinimumLevel:Default"]}]");
 
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseUrls($"http://*:{port}");

@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /source
 
 COPY *.csproj .
@@ -8,9 +8,9 @@ COPY . .
 RUN dotnet publish -c release -o /app -r linux-x64 --self-contained true --no-restore /p:PublishReadyToRun=true
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/runtime:3.1-buster-slim
+FROM mcr.microsoft.com/dotnet/runtime:7.0-buster-slim
 
-MAINTAINER Mike <ozczecho@yahoo.com>
+LABEL Mike <ozczecho@yahoo.com>
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \

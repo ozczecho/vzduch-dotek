@@ -19,7 +19,7 @@ namespace VzduchDotek.Net
         public void ConfigureContainer(ServiceRegistry services)
         {
             services.Configure<AirTouchOptions>(Configuration.GetSection(AirTouchOptions.AirTouch));
-            
+            services.AddHealthChecks();
             services.Scan(s =>
             {
                 s.TheCallingAssembly();
@@ -32,7 +32,10 @@ namespace VzduchDotek.Net
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
+            app.UseHealthChecks("/healthcheck");
             app.UseExceptionHandler("/error");
+   
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
