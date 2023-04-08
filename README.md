@@ -21,6 +21,11 @@ The `appsettings.json` file contains a section for the AirTouch3 controller. You
 
 I used `vscode` to put this together. The default port the api runs on is `5353`. Once you pull down the repo, you will need to update the `appsettings.json` file to match your home environment. Without setting the right ip address and port of the actual AirTouch 3 control unit this Api will not work. After that, you should be able to hit F5 (if running inside of `vscode` and then navigate to `http://localhost:5353/api/aircons` and get the current status of your AC. The build has been tested on Windows 10 and Linux (Ubuntu).
 
+## Changes
+
+* 2023  - Added a new Api  `aircons/{selectedId}/zones/{zoneId}/damper/{percentage}`. Allows you to set the damper percentage. Percentage must be between 0 and 100% and divisible by 5.
+        - Updated the .net version to .net 7.0
+
 ### Home Assistant Addon
 
 I have created an addon for this Api. This makes it easy to get up and running. See [here](https://github.com/ozczecho/home-assistant-addons/tree/main/vzduch)

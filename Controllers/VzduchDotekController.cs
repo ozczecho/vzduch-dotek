@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using VzduchDotek.Net.AirTouch;
@@ -206,6 +207,61 @@ namespace VzduchDotek.Net.Controllers
             }
             else
                 throw new Exception("Failed to find selected aircon unit");
+
+            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
+
+            return Content(response, "application/json");
+        }
+
+        [HttpPost("aircons/{selectedId}/zones/{zoneId}/damper/{percentage}")]
+        public object SetDamperPercentage(int selectedId, int zoneId, int percentage)
+        {
+            Log.ForContext<VzduchDotekController>().Debug("AC [{Ac}] Zone [{Zone}] Percentage [{Percentage}]", selectedId, zoneId, percentage);
+
+            if (percentage < 0 || percentage > 100)
+                throw new Exception("Requested percentage must be between 0 and 100%");
+
+            var result = _client.ConnectAndSend(_atMessages.GetInitMsg());
+            var parser = new MessageResponseParser();
+            var at = parser.Parse(result);
+            var ac = at.GetSelectedAircon();
+            if (ac == null)
+                throw new Exception("Failed to find selected aircon unit");
+
+
+            if (ac.Zones[zoneId].Status == ZoneStatus.ZoneOff)
+            {
+                Log.ForContext<VzduchDotekController>().Debug("Turning Zone [{ZoneId}] ON", zoneId);
+                ZoneToggle(selectedId, zoneId);
+                result = _client.ConnectAndSend(_atMessages.GetInitMsg());
+                at = parser.Parse(result);
+                ac = at.GetSelectedAircon();
+            }
+
+            var requestedPercentage = 5 * (int)Math.Round(percentage / 5.0);
+            var currentPercentage = ac.Zones[zoneId].FanValue;
+            var incDec = currentPercentage > requestedPercentage ? AcTemperature.Decrement : AcTemperature.Increment;
+            var runCount = 0;
+            while (currentPercentage != requestedPercentage && runCount < 21)
+            {
+
+                var t = Task.Run(async delegate
+                {
+                    _client.ConnectAndSend(_atMessages.SetFan(zoneId, (int)incDec));
+                     await Task.Delay(500);
+                });
+                t.Wait();
+
+                result = _client.ConnectAndSend(_atMessages.GetInitMsg());
+                at = parser.Parse(result);
+                ac = at.GetSelectedAircon();
+                currentPercentage = ac.Zones[zoneId].FanValue;
+
+                Log.ForContext<VzduchDotekController>().Debug("Zone [{ZoneId}] Current Percentage [{Current}] Requested [{Requested}]", zoneId, currentPercentage, requestedPercentage);
+
+                runCount++;
+            }
 
             var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
