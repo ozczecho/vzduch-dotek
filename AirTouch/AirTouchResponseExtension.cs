@@ -76,6 +76,16 @@ namespace VzduchDotek.Net.AirTouch
             }
             return sensors;
         }
+
+        public static int GetNumberOfZonesWithSensors(this AirTouchResponse response, int touchPadGroupId, int touchPadTemperature, List<Sensor> sensors)
+        {
+            var zones = GetZones(response, touchPadGroupId, touchPadTemperature, sensors);
+            if (zones == null)
+                return 0;
+
+            return zones.Where(x => x.Sensors != null && x.Sensors.Any() && x.Sensors.Any(s => s.IsAvailable)).Count();
+
+        }
         public static AcMode GetAcMode(this AirTouchResponse response)
         {
             var acMode = Convert.ToInt32(response.Content[MessageConstants.AirconMode].JavaStyleSubstring(1, 8), 2);

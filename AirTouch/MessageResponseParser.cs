@@ -21,6 +21,7 @@ namespace VzduchDotek.Net.AirTouch
             ac.DesiredTemperature = response.GetDesiredTemperature();
             ac.RoomTemperature = response.GetRoomTemperature();
             ac.ThermostatMode = response.GetThermostatMode();
+            ac.NumberOfZonesWithSensors = response.GetNumberOfZonesWithSensors(ac.TouchPadGroupId, ac.TouchPadTemperature, ac.Sensors);
             ac.Zones = response.GetZones(ac.TouchPadGroupId, ac.TouchPadTemperature, ac.Sensors);
 
             return new AirTouchSystem(new List<Aircon> {ac});
