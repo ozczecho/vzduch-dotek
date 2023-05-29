@@ -24,7 +24,7 @@
                 "DOTEK_vzduchPort": "8253",
                 "DOTEK_airTouch__localHost": "192.168.80.21",
                 "DOTEK_airTouch__localPort": "8899",
-                "DOTEK_Serilog__MinimumLevel": "Information"
+                "DOTEK_Serilog__MinimumLevel__Default": "Verbose"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

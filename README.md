@@ -23,8 +23,9 @@ I used `vscode` to put this together. The default port the api runs on is `5353`
 
 ## Changes
 
-* 2023  - Added a new Api  `aircons/{selectedId}/zones/{zoneId}/damper/{percentage}`. Allows you to set the damper percentage. Percentage must be between 0 and 100% and divisible by 5.
-        - Updated the .net version to .net 7.0
+* 2023.05 - Fix Setting Log Level. Clean up some code
+* 2023.04 - Added a new Api  `aircons/{selectedId}/zones/{zoneId}/damper/{percentage}`. Allows you to set the damper percentage. Percentage must be between 0 and 100% and divisible by 5.
+          - Updated the .net version to .net 7.0
 
 ### Home Assistant Addon
 

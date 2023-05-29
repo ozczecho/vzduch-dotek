@@ -14,12 +14,6 @@ namespace VzduchDotek.Net.Controllers
     {
         private readonly ITcpClient _client;
         private readonly AirTouchMessages _atMessages;
-
-        private readonly JsonSerializerOptions _serializeOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true
-        };
  
         public VzduchDotekController(ITcpClient client, AirTouchMessages atMessages)
         {
@@ -34,7 +28,7 @@ namespace VzduchDotek.Net.Controllers
             var parser = new MessageResponseParser();
             var at = parser.Parse(result);
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -53,7 +47,7 @@ namespace VzduchDotek.Net.Controllers
               at = parser.Parse(result);
             }
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -69,7 +63,7 @@ namespace VzduchDotek.Net.Controllers
             result = _client.ConnectAndSend(_atMessages.ToggleAcOnOff(at.SelectedAc));
             at = parser.Parse(result);
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -94,7 +88,7 @@ namespace VzduchDotek.Net.Controllers
                   throw new Exception("Failed to find selected zone");
             }
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -116,7 +110,7 @@ namespace VzduchDotek.Net.Controllers
             else
               throw new Exception("Failed to find selected zone");
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -138,7 +132,7 @@ namespace VzduchDotek.Net.Controllers
             else
                 throw new Exception("Failed to find selected aircon unit");
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -160,7 +154,7 @@ namespace VzduchDotek.Net.Controllers
             else
                 throw new Exception("Failed to find selected aircon unit");
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -182,7 +176,7 @@ namespace VzduchDotek.Net.Controllers
             else
                 throw new Exception("Failed to find selected aircon unit");
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -208,7 +202,7 @@ namespace VzduchDotek.Net.Controllers
             else
                 throw new Exception("Failed to find selected aircon unit");
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");
@@ -263,7 +257,7 @@ namespace VzduchDotek.Net.Controllers
                 runCount++;
             }
 
-            var response = System.Text.Json.JsonSerializer.Serialize<AirTouchSystem>(at, _serializeOptions);
+            var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
             Log.ForContext<VzduchDotekController>().Debug("{@AirTouchSystem}", at);
 
             return Content(response, "application/json");

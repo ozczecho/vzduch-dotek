@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace VzduchDotek.Net.AirTouch
 {
@@ -26,5 +28,10 @@ namespace VzduchDotek.Net.AirTouch
         {
             return Aircons[SelectedAc];
         }
+    }
+    [JsonSourceGenerationOptions(WriteIndented = true, PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
+    [JsonSerializable(typeof(AirTouchSystem))]
+    internal partial class SourceGenerationContext : JsonSerializerContext
+    {
     }
 }

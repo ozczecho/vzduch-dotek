@@ -15,7 +15,7 @@ namespace VzduchDotek.Net
         {
             Log.Logger = new LoggerConfiguration() 
                 .ReadFrom.Configuration(Configuration)
-                .MinimumLevel.Debug()
+               // .MinimumLevel.Debug()
                // .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();
 
