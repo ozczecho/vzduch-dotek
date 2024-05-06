@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System.IO;
+using Serilog.Settings.Configuration;
 
 namespace VzduchDotek.Net
 {
@@ -13,10 +14,15 @@ namespace VzduchDotek.Net
     {
         public static void Main(string[] args)
         {
+            var options = new ConfigurationReaderOptions(
+                typeof(ConsoleLoggerConfigurationExtensions).Assembly, 
+                typeof(Serilog.Sinks.SystemConsole.Themes.ConsoleTheme).Assembly,
+                typeof(Serilog.Sinks.File.FileSink).Assembly);
+
             Log.Logger = new LoggerConfiguration() 
-                .ReadFrom.Configuration(Configuration)
+                .ReadFrom.Configuration(Configuration, options)
                 //.MinimumLevel.Debug()
-                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+               // .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();
 
             try 
