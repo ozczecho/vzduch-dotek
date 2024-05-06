@@ -16,7 +16,6 @@ namespace VzduchDotek.Net
         {
             var options = new ConfigurationReaderOptions(
                 typeof(ConsoleLoggerConfigurationExtensions).Assembly, 
-                typeof(Serilog.Sinks.SystemConsole.Themes.ConsoleTheme).Assembly,
                 typeof(Serilog.Sinks.File.FileSink).Assembly);
 
             Log.Logger = new LoggerConfiguration() 
