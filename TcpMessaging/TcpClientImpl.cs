@@ -107,7 +107,15 @@ namespace VzduchDotek.Net.TcpMessaging
                 {
                     if (_client != null)
                     {
-                        _client.GetStream().Close();
+                        if (_client.Connected)
+                        {
+                            var stream = _client.GetStream();
+                            if (stream != null && stream.Socket != null && stream.Socket.Connected)
+                            {
+                                stream.Socket.Close();
+                                stream.Close();
+                            }
+                        }
                         _client.Close();
                         _client = null;
                     }

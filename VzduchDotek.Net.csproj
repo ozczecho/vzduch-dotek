@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -21,13 +21,14 @@
 
   <ItemGroup>
     <PackageReference Include="BaselineTypeDiscovery" Version="2.0.0" />
-    <PackageReference Include="Lamar" Version="11.1.2" />
-    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="11.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="Lamar" Version="13.0.3" />
+    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />

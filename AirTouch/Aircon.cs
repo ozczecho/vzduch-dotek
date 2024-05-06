@@ -38,6 +38,6 @@ namespace VzduchDotek.Net.AirTouch
             return Zones.FirstOrDefault(x=>x.Id == id);
         }
 
-        public string Version => "1.0";
+        public string Version => "1.1";
     }
 }

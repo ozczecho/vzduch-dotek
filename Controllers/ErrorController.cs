@@ -10,6 +10,6 @@ namespace VzduchDotek.Net.Controllers
     public class ErrorController : ControllerBase
     {
         [Route("/error")]
-        public IActionResult Error() => Problem();
+        public IActionResult Error() => Problem(detail: "Unhandled Error. Check Logs", title: "Global Error Handler");
     }
 }
