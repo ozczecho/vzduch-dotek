@@ -1,3 +1,5 @@
 /Logs/*.log
 /bin
 /obj
+/.vs
+/Properties

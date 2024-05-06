@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /source
 
 COPY *.csproj .
@@ -8,7 +8,7 @@ COPY . .
 RUN dotnet publish -c release -o /app -r linux-x64 --self-contained true --no-restore
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/runtime:7.0-buster-slim
+FROM mcr.microsoft.com/dotnet/runtime:8.0-buster-slim
 
 LABEL Mike <ozczecho@yahoo.com>
 

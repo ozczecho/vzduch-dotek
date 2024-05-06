@@ -33,8 +33,7 @@ namespace VzduchDotek.Net
         {
             app.UseRouting();
             app.UseHealthChecks("/healthcheck");
-            app.UseExceptionHandler("/error");
-   
+            app.UseExceptionHandler(new ExceptionHandlerOptions { AllowStatusCode404Response = true });
 
             app.UseEndpoints(endpoints =>
             {
