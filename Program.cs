@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Sinks.SystemConsole;
 using System.IO;
 
 namespace VzduchDotek.Net
@@ -16,7 +15,7 @@ namespace VzduchDotek.Net
         {
             Log.Logger = new LoggerConfiguration() 
                 .ReadFrom.Configuration(Configuration)
-               // .MinimumLevel.Debug()
+                //.MinimumLevel.Debug()
                // .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();
 
