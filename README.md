@@ -22,6 +22,8 @@ The `appsettings.json` file contains a section for the AirTouch3 controller. You
 I used `vscode` to put this together. The default port the api runs on is `5353`. Once you pull down the repo, you will need to update the `appsettings.json` file to match your home environment. Without setting the right ip address and port of the actual AirTouch 3 control unit this Api will not work. After that, you should be able to hit F5 (if running inside of `vscode` and then navigate to `http://localhost:5353/api/aircons` and get the current status of your AC. The build has been tested on Windows 10 and Linux (Ubuntu).
 
 ## Changes
+
+* 2024.06 - Add timeout logic when setting damper percentage
 * 2024.05 - Update .net to v8. Improve error handling
 * 2023.05 - Fix Setting Log Level. Clean up some code
           - Add new property to the ac response that tells us the number of zones with the temperature puks

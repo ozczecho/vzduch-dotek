@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -239,22 +240,32 @@ namespace VzduchDotek.Net.Controllers
             var runCount = 0;
             while (currentPercentage != requestedPercentage && runCount < 21)
             {
-
-                var t = Task.Run(async delegate
+                var cancellationToken = new CancellationTokenSource(9000);
+                try
                 {
-                    _client.ConnectAndSend(_atMessages.SetFan(zoneId, (int)incDec));
-                     await Task.Delay(500);
-                });
-                t.Wait();
+                    var t = Task.Run(async delegate
+                    {
+                        _client.ConnectAndSend(_atMessages.SetFan(zoneId, (int)incDec));
+                        await Task.Delay(500);
+                    });
+                    t.Wait(cancellationToken.Token);
 
-                result = _client.ConnectAndSend(_atMessages.GetInitMsg());
-                at = parser.Parse(result);
-                ac = at.GetSelectedAircon();
-                currentPercentage = ac.Zones[zoneId].FanValue;
+                    result = _client.ConnectAndSend(_atMessages.GetInitMsg());
+                    at = parser.Parse(result);
+                    ac = at.GetSelectedAircon();
+                    currentPercentage = ac.Zones[zoneId].FanValue;
 
-                Log.ForContext<VzduchDotekController>().Debug("Zone [{ZoneId}] Current Percentage [{Current}] Requested [{Requested}]", zoneId, currentPercentage, requestedPercentage);
-
-                runCount++;
+                    Log.ForContext<VzduchDotekController>().Debug("Zone [{ZoneId}] Current Percentage [{Current}] Requested [{Requested}]", zoneId, currentPercentage, requestedPercentage);
+                }
+                catch (OperationCanceledException ex)
+                {
+                    Log.ForContext<VzduchDotekController>().Warning("OperationCanceledException: Zone [{ZoneId}] Current Percentage [{Current}] Requested [{Requested}] [{@ex}]", 
+                    zoneId, currentPercentage, requestedPercentage, ex);
+                }
+                finally
+                {
+                    runCount++;
+                }
             }
 
             var response = System.Text.Json.JsonSerializer.Serialize(at, typeof(AirTouchSystem), SourceGenerationContext.Default);
